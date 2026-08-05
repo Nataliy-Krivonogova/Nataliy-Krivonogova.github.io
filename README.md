@@ -1,1 +1,0 @@
-# Nataliy-Krivonogova.github.io
