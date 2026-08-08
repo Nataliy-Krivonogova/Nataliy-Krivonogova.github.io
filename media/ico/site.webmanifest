@@ -1,0 +1,21 @@
+{
+  "name": "Ћучший по профессии Х 2026",
+  "short_name": "Ћѕѕ 2026",
+  "description": "ѕерсональна€ страница участника конкурса ЂЋучший по профессии Х 2026ї.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0B1220",
+  "background_color": "#0B1220",
+  "icons": [
+    {
+      "src": "/media/ico/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/media/ico/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
