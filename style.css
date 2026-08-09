@@ -1690,7 +1690,9 @@ html::-webkit-scrollbar-thumb:hover {
     .participant-seal {
         justify-content: center;
     }
-
+   .participant-seal {
+    position: static;
+	
     .participant-info {
         align-items: center;
     }
