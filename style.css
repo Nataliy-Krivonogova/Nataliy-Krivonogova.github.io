@@ -1689,9 +1689,11 @@ html::-webkit-scrollbar-thumb:hover {
     .participant-photo,
     .participant-seal {
         justify-content: center;
-    }
-   .participant-seal {
-    position: static;
+		
+    .participant-seal {
+         position: static;
+
+         margin-top: var(--space-24);
 	
     .participant-info {
         align-items: center;
