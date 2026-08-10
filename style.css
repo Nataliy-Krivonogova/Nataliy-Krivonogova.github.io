@@ -1,0 +1,2618 @@
+/*==================================================
+  1. RESET
+==================================================*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+svg {
+    display: block;
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*==================================================
+  2. DESIGN TOKENS
+==================================================*/
+
+:root {
+
+    /*==============================================
+      COLORS
+    ==============================================*/
+
+    --color-background: #06111f;
+
+    --color-surface: #09192c;
+    --color-surface-hover: #0d2239;
+
+    --color-primary: #12e8d8;
+    --color-primary-dark: #0ec7bb;
+
+    --color-primary-soft: rgba(18,232,216,.08);
+    --color-primary-light: rgba(18,232,216,.16);
+
+    --color-border: rgba(18,232,216,.12);
+    --color-border-hover: rgba(18,232,216,.30);
+
+    --color-text: #f4f8fb;
+    --color-text-light: #cfd9e4;
+    --color-text-muted: #8fa5bc;
+
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    /*==============================================
+      TYPOGRAPHY
+    ==============================================*/
+    --font-size-small: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-large: 1.125rem;
+
+    --font-size-h3: 1.5rem;
+    --font-size-h2: 2rem;
+    --font-size-h1: 2.8rem;
+
+    /* Header */
+
+    --font-size-header-title: 2.4rem;
+    --font-size-header-subtitle: 1.1rem;
+
+    --font-family:
+        "Segoe UI",
+        "Inter",
+        "Roboto",
+        Arial,
+        sans-serif;
+
+    --font-size-xs: .75rem;
+    --font-size-sm: .875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 3rem;
+
+    --participant-name-size: 2.6rem;
+    --participant-position-size: 1.2rem;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.3;
+    --line-height-relaxed: 1.7;
+
+    /*==============================================
+      LAYOUT
+    ==============================================*/
+
+    --container-width: 1280px;
+    --container-padding: 32px;
+
+    --section-gap: 32px;
+    --card-gap: 24px;
+
+    /*==============================================
+      SPACING
+    ==============================================*/
+
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-20: 20px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-40: 40px;
+    --space-48: 48px;
+    --space-56: 56px;
+    --space-64: 64px;
+	--space-120:120px;
+
+    /*==============================================
+      COMPONENT SIZES
+    ==============================================*/
+
+    --avatar-size: 220px;
+    --seal-size: 220px;
+
+    --icon-size: 42px;
+    --section-icon-size: 52px;
+
+    --button-height: 52px;
+
+    /*==============================================
+      BORDER RADIUS
+    ==============================================*/
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+
+    /*==============================================
+      SHADOWS
+    ==============================================*/
+
+    --shadow-sm:
+        0 4px 12px rgba(0,0,0,.18);
+
+    --shadow-md:
+        0 10px 28px rgba(0,0,0,.24);
+
+    --shadow-lg:
+        0 18px 48px rgba(0,0,0,.34);
+
+    /*==============================================
+      GLOW EFFECTS
+    ==============================================*/
+
+    --glow-soft:
+        0 0 12px rgba(18,232,216,.10);
+
+    --glow-medium:
+        0 0 18px rgba(18,232,216,.18);
+
+    --glow-strong:
+        0 0 28px rgba(18,232,216,.28);
+
+    /*==============================================
+      BORDERS
+    ==============================================*/
+
+    --border:
+        1px solid var(--color-border);
+
+    --border-hover:
+        1px solid var(--color-border-hover);
+
+    /*==============================================
+      TRANSITIONS
+    ==============================================*/
+
+    --transition-fast: .2s ease;
+    --transition-normal: .3s ease;
+    --transition-slow: .5s ease;
+
+    /*==============================================
+      Z-INDEX
+    ==============================================*/
+
+    --z-header: 100;
+    --z-overlay: 500;
+    --z-modal: 1000;
+
+}
+
+/*==================================================
+  3. BASE
+==================================================*/
+
+html,
+body {
+    background: var(--color-background);
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+
+    color: var(--color-text);
+
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--color-white);
+
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+}
+
+h1 {
+    font-size: var(--font-size-3xl);
+}
+
+h2 {
+    font-size: var(--font-size-2xl);
+}
+
+h3 {
+    font-size: var(--font-size-xl);
+}
+
+p {
+    color: var(--color-text-light);
+
+}
+
+p + p {
+    margin-top: var(--space-16);
+}
+
+strong {
+    font-weight: var(--font-weight-semibold);
+}
+
+small {
+    font-size: var(--font-size-sm);
+}
+
+hr {
+    border: none;
+    border-top: var(--border);
+
+    margin:
+        var(--space-40)
+        0;
+}
+
+a {
+    transition:
+        color var(--transition-fast),
+        opacity var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+button {
+    transition:
+        background var(--transition-normal),
+        border-color var(--transition-normal),
+        color var(--transition-normal),
+        transform var(--transition-fast),
+        box-shadow var(--transition-normal);
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--color-surface-hover);
+
+    border-radius: 999px;
+
+    transition: background var(--transition-normal);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-dark);
+}
+
+/*==================================================
+  4. LAYOUT
+==================================================*/
+
+.container {
+    width: min(100% - 2rem, 1400px);
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: var(--section-gap);
+}
+
+.section + .section {
+    margin-top: var(--space-32);
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+
+    gap: var(--space-16);
+
+    margin-top: var(--space-32);
+	margin-bottom: var(--space-12);
+	
+    color: var(--color-primary);
+
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+/* ==================================================
+   Заголовок раздела внутри карточки
+   ================================================== */
+
+.section-header {
+    margin: 0;
+}
+
+.section-header .section-title {
+    margin-top: 0;
+    margin-bottom: var(--space-12);
+}
+
+/* Заголовок внутри карточки обращения */
+/*==================================================
+  Обращение к конкурсной комиссии
+==================================================*/
+
+.commission-message .section-title {
+    margin-top: 0;
+    margin-bottom: var(--space-24);
+}
+
+.section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--section-icon-size);
+    height: var(--section-icon-size);
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--color-primary-soft);
+
+    color: var(--color-primary);
+
+    font-size: 1.3rem;
+
+    box-shadow: var(--glow-soft);
+}
+
+.card {
+    background: var(--color-surface);
+
+    border: var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        background var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        transform var(--transition-normal);
+}
+
+.card:hover {
+    background: var(--color-surface-hover);
+
+    border: var(--border-hover);
+
+    box-shadow:
+        var(--shadow-md),
+        var(--glow-soft);
+
+    transform: translateY(-4px);
+}
+
+.grid-2 {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: var(--card-gap);
+
+    margin-top: var(--space-32);
+}
+
+.grid-3 {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: var(--card-gap);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+/*==================================================
+  5. HEADER
+==================================================*/
+.site-header {
+    width: 100%;
+    padding: 2rem 0;
+    background: transparent;
+    border-bottom: 1px solid var(--border-color);
+	
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+}
+
+/*--------------------------------------------------
+Логотип конкурса
+--------------------------------------------------*/
+
+.header-logo {
+    flex: 0 0 auto;
+}
+
+.header-logo img {
+    display: block;
+    width: 110px;
+    height: auto;
+  
+}
+
+/*--------------------------------------------------
+Название конкурса
+--------------------------------------------------*/
+
+.header-title {
+    flex: 1;
+}
+
+.header-title h1 {
+    margin: 0 0 0.35rem;
+    font-size: var(--font-size-header-title);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+.header-subtitle {
+    margin: 0;
+    font-size: var(--font-size-header-subtitle);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/*--------------------------------------------------
+Приветствие
+--------------------------------------------------*/
+
+.header-welcome {
+    flex: 0 1 420px;
+    text-align: left;
+}
+
+.header-welcome p {
+    margin: 0;
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.header-welcome p + p {
+    margin-top: 0.75rem;
+}
+
+    width: 100%;
+}
+
+/*==================================================*
+*6. PARTICIPANT*
+*==================================================*/
+
+.participant {
+    padding:
+        var(--space-64)
+        0;
+}
+
+.participant-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        var(--avatar-size)
+        1fr
+        var(--seal-size);
+
+    align-items: center;
+
+    gap: var(--space-40);
+
+    padding: 48px;
+
+    background: var(--color-surface);
+
+    border: var(--border);
+
+    border-radius: var(--radius-xl);
+
+    box-shadow: var(--shadow-md);
+
+    transition:
+        background var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        transform var(--transition-normal);
+}
+
+.participant-card:hover {
+    background: var(--color-surface-hover);
+
+    border: var(--border-hover);
+
+    box-shadow:
+        var(--shadow-lg),
+        var(--glow-soft);
+
+    transform: translateY(-4px);
+}
+
+.participant-photo {
+    display: flex;
+    justify-content: center;
+}
+
+.participant-photo img {
+    width: var(--avatar-size);
+    aspect-ratio: 1;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid var(--color-primary-light);
+
+    box-shadow:
+        0 0 0 10px var(--color-primary-soft),
+        var(--shadow-lg);
+}
+
+.participant-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.participant-name {
+    margin-bottom: var(--space-16);
+
+    color: var(--color-white);
+
+    font-size: var(--participant-name-size);
+    font-weight: var(--font-weight-bold);
+
+    line-height: 1.15;
+}
+
+.participant-position {
+    margin-bottom: var(--space-32);
+
+    color: var(--color-primary);
+
+    font-size: var(--participant-position-size);
+    font-weight: var(--font-weight-medium);
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-16);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+
+    gap: var(--space-16);
+
+    color: var(--color-text-light);
+
+    font-size: 1rem;
+
+    transition:
+        color var(--transition-normal),
+        transform var(--transition-fast);
+}
+
+.contact-item:hover {
+    color: var(--color-primary);
+
+    transform: translateX(4px);
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: var(--icon-size);
+    height: var(--icon-size);
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--color-primary-soft);
+
+    color: var(--color-primary);
+
+    font-size: 1.1rem;
+
+    box-shadow: var(--glow-soft);
+}
+
+.participant-seal {
+    position: absolute;
+
+    top: 50%;
+    right: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(-50%);
+}
+
+.participant-seal img {
+    width: var(--seal-size);
+
+    transition:
+        transform var(--transition-normal),
+        filter var(--transition-normal);
+}
+
+.participant-seal img:hover {
+    transform: translateY(0) scale(1.05);
+
+    filter:
+        drop-shadow(0 0 18px rgba(18,232,216,.28));
+}
+
+.participant-department {
+    margin-bottom: var(--space-24);
+
+    color: var(--color-text);
+
+    font-size: 1.05rem;
+    line-height: var(--line-height-normal);
+}
+
+.participant-description {
+    margin-bottom: var(--space-32);
+
+    color: var(--color-text-light);
+
+    line-height: 1.8;
+}
+
+/*==================================================
+  7. CARDS
+==================================================*/
+.coming-soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+}
+
+.coming-soon .container {
+    max-width: 720px;
+}
+
+.coming-soon h1 {
+    margin-bottom: 1.5rem;
+    font-size: var(--font-size-h1);
+    line-height: 1.3;
+    color: var(--text-primary);
+}
+
+.coming-soon p {
+    margin-bottom: 1rem;
+    font-size: var(--font-size-large);
+    color: var(--text-secondary);
+}
+
+.coming-soon p:last-child {
+    margin-bottom: 0;
+}
+
+.info-card,
+.quote-card {
+    padding: 36px;
+}
+
+.info-card h2,
+.quote-card h2 {
+    margin-bottom: var(--space-24);
+
+    color: var(--color-primary);
+
+    font-size: var(--font-size-xl);
+}
+
+.info-card h3 {
+    margin-bottom: var(--space-16);
+
+    color: var(--color-white);
+
+    font-size: var(--font-size-lg);
+}
+
+.info-card > p:first-of-type {
+    margin-top: var(--space-8);
+}
+
+.quote-card p {
+    color: var(--color-text-light);
+
+}
+
+.info-card ul {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-16);
+
+    margin-top: var(--space-20);
+}
+
+.info-card li {
+    display: flex;
+    align-items: flex-start;
+
+    gap: var(--space-16);
+}
+
+.info-card li::before {
+    content: "•";
+
+    flex-shrink: 0;
+
+    color: var(--color-primary);
+
+    font-size: 1.25rem;
+
+    line-height: 1;
+}
+
+.quote-card {
+    position: relative;
+
+    border-left: 4px solid var(--color-primary);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-primary-soft),
+            transparent
+        );
+}
+
+.quote-card footer {
+    margin-top: var(--space-24);
+
+    color: var(--color-primary);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+
+    letter-spacing: .05em;
+
+    text-transform: uppercase;
+}
+
+.info-card {
+    padding: 24px;
+
+    background: var(--color-primary-soft);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+	
+	margin-top: var(--space-0);
+
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+.info-card-intro {
+    margin-top: var(--space-48);
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+
+    background: var(--color-primary-light);
+
+    border-color: var(--color-border-hover);
+
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, .25),
+        0 0 18px rgba(18, 232, 216, .10);
+}
+
+/*==================================================*
+* 7.1 INFO CARDS WITH ICONS
+*==================================================*/
+
+.grid-2 .info-card {
+    position: relative;
+
+    min-height: 150px;
+
+    padding:
+        var(--space-24)
+        var(--space-24)
+        var(--space-24)
+        88px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/*--------------------------------------------------*
+* Заголовок карточки с иконкой
+*--------------------------------------------------*/
+
+.card-title-with-icon {
+    margin: 0 0 var(--space-16);
+
+    display: flex;
+    align-items: center;
+
+    color: var(--color-white);
+
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+
+    line-height: 1.25;
+}
+
+
+/*--------------------------------------------------*
+* Иконка
+*--------------------------------------------------*/
+
+.grid-2 .card-icon {
+    position: absolute;
+
+    left: 28px;
+    top: 50%;
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    transform: translateY(-50%);
+}
+
+
+/*--------------------------------------------------*
+* Текст карточки
+*--------------------------------------------------*/
+
+..grid-2 .info-card p {
+    margin: 0;
+
+    color: var(--color-text-light);
+
+    line-height: 1.45;
+}
+
+/* Расстояние между заголовком и описанием карточки */
+.info-card .card-title-with-icon {
+    margin-bottom: var(--space-0);
+}
+
+.info-card p {
+    margin-top: 0;
+}
+
+
+/*==================================================*
+* 8. DOCUMENTS
+*==================================================*/
+
+
+/*--------------------------------------------------*
+* 8.1 Documents Section
+*--------------------------------------------------*/
+
+/* Общий контейнер раздела */
+
+.documents-section {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: var(--space-32);
+}
+
+
+/*--------------------------------------------------*
+* 8.2 Documents Panels
+*--------------------------------------------------*/
+
+/* Общая панель документов */
+
+.documents-panel {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: none;
+
+    box-sizing: border-box;
+
+    padding: var(--space-32);
+
+    margin-left: 0;
+    margin-right: 0;
+
+    gap: 0;
+}
+
+
+/* Панель «Материалы проекта» */
+
+.documents-panel.documents-panel-intro {
+    margin-top: var(--space-64);
+}
+
+
+/* Следующая панель документов */
+
+.documents-panel + .documents-panel {
+    margin-top: var(--space-24);
+}
+
+
+/*--------------------------------------------------*
+* Заголовок раздела
+*--------------------------------------------------*/
+
+.documents-panel > .section-title {
+    margin-top: 0;
+    margin-bottom: var(--space-4);
+}
+
+
+/*--------------------------------------------------*
+* Описание раздела
+*--------------------------------------------------*/
+
+.documents-panel > .section-description {
+    margin-top: 0;
+    margin-bottom: var(--space-24);
+}
+
+
+/*--------------------------------------------------*
+* Заголовок «Основные документы»
+*--------------------------------------------------*/
+
+.documents-panel > .documents-panel-title {
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-16);
+
+    text-align: center;
+}
+
+
+/*--------------------------------------------------*
+* 8.3 Documents Grid
+*--------------------------------------------------*/
+
+/* Базовая сетка документов */
+
+.documents-grid {
+    display: grid;
+
+    width: 100%;
+
+    gap: var(--space-24);
+}
+
+
+/* Основные документы */
+
+.documents-grid-primary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+/* Отчёты интеллектуальных систем */
+
+.documents-grid-ai {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+
+/*--------------------------------------------------*
+* 8.4 Document Card
+*--------------------------------------------------*/
+
+/*
+ * Карточка наследует визуальное оформление
+ * существующего класса .card
+ */
+
+.document-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 180px;
+
+    box-sizing: border-box;
+
+    padding: var(--space-24);
+    padding-left: 104px;
+
+    text-align: left;
+    text-decoration: none;
+
+    color: inherit;
+}
+
+
+/*--------------------------------------------------*
+* 8.5 Card Content
+*--------------------------------------------------*/
+
+/* Контейнер для SVG */
+
+.document-icon {
+    position: absolute;
+
+    left: var(--space-24);
+    top: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    transform: translateY(-50%);
+
+    flex-shrink: 0;
+}
+
+
+/*
+ * Нормализация SVG разных источников.
+ * Изображение вписывается в единый контейнер.
+ */
+
+.document-icon img,
+.document-icon svg {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 48px;
+    max-height: 48px;
+
+    object-fit: contain;
+}
+
+
+/* Контейнер содержимого */
+
+.document-content {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-0);
+}
+
+
+/* Заголовок */
+
+.document-title {
+    margin: 0 0 var(--space-8);
+
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+
+/* Описание */
+
+.document-description {
+    margin: 0;
+
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+
+    text-align: left;
+}
+
+
+/*--------------------------------------------------*
+* Нижняя служебная область
+*--------------------------------------------------*/
+
+.document-meta {
+    position: absolute;
+
+    right: var(--space-16);
+    bottom: var(--space-16);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+}
+
+
+/* Иконка скачивания */
+
+.document-download-icon {
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    opacity: .85;
+
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(78%)
+        sepia(74%)
+        saturate(1000%)
+        hue-rotate(128deg)
+        brightness(102%)
+        contrast(101%);
+
+    transition:
+        transform var(--transition-fast),
+        opacity var(--transition-normal),
+        filter var(--transition-normal);
+}
+
+
+/* Hover */
+
+.document-card:hover .document-download-icon {
+    opacity: 1;
+
+    transform: translateY(-2px);
+}
+
+
+/*--------------------------------------------------*
+ * Hover
+ *--------------------------------------------------*/
+
+.document-card:hover .document-download-icon {
+    opacity: 1;
+
+    transform: translateY(-2px);
+}
+
+.quote-mark {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgba(0, 210, 220, 0.12);
+
+    color: var(--accent-color);
+}
+
+.commission-message {
+    position: relative;
+    padding-left: 100px;
+}
+
+.quote-mark {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgba(0, 210, 220, 0.12);
+
+    color: var(--accent-color);
+}
+
+.quote-mark img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.pdf-icon {
+    display: inline-block;
+
+    width: 32px;
+    height: 32px;
+
+    margin-left: var(--space-4);
+
+    vertical-align: middle;
+
+    object-fit: contain;
+}
+/*--------------------------------------------------
+  8.6 Responsive
+--------------------------------------------------*/
+
+/*
+ * Адаптивность будет реализована
+ * после завершения всех разделов сайта
+ * в рамках общей настройки responsive.css.
+ */
+ 
+ /*==================================================*
+- О КОНКУРСНОЙ РАБОТЕ
+  *==================================================*/
+
+.about-header {
+    position: relative;
+    padding-left: 78px;
+}
+
+.about-icon {
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+    background: rgba(0, 210, 220, 0.12);
+}
+
+.about-icon img {
+    display: block;
+
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+}
+
+/* SVG-иконка */
+.about-icon::before {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 48px;
+    height: 48px;
+
+    transform: translate(-50%, -50%);
+
+    background: var(--color-accent);
+
+    -webkit-mask-image: url("../media/assets/about.svg");
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+
+    mask-image: url("../media/assets/about.svg");
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+}
+
+
+
+
+/* Основной текст блока */
+
+
+.about-content {
+    padding-left: 78px;
+    padding-right: 20px;
+}
+
+/*==================================================*
+* ОБРАЩЕНИЕ К КОНКУРСНОЙ КОМИССИИ
+*==================================================*/
+
+.commission-message {
+    position: relative;
+
+    padding: var(--space-24);
+    padding-left: 120px;
+    padding-right: 270px;
+    padding-bottom: var(--space-20);
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+}
+
+.commission-award {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+
+    width: 240px;
+    height: 480px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding-left: 20px;
+
+    box-sizing: border-box;
+
+    border-left: 1px solid var(--color-border);
+}
+
+.commission-award img {
+    display: block;
+
+    width: 240px;
+    height: 180px;
+
+    flex-shrink: 0;
+
+    object-fit: contain;
+}
+
+.message-signature {
+    margin-top: var(--space-16);
+    padding-bottom: var(--space-16);
+}
+
+#message {
+    margin-top: var(--space-48);
+    padding-bottom: var(--space-16);
+}
+/*==================================================
+  9. BUTTONS
+==================================================*/
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-12);
+
+    min-height: var(--button-height);
+
+    padding:
+        0
+        var(--space-24);
+
+    border: var(--border);
+    border-radius: var(--radius-md);
+
+    background: var(--color-primary);
+
+    color: var(--color-background);
+
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+
+    transition:
+        background var(--transition-normal),
+        color var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal),
+        transform var(--transition-fast);
+}
+
+.button:hover {
+    background: var(--color-primary-dark);
+
+    border-color: var(--color-primary-dark);
+
+    box-shadow: var(--glow-medium);
+
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+.button-outline {
+    background: transparent;
+
+    color: var(--color-primary);
+
+    border: var(--border-hover);
+}
+
+.button-outline:hover {
+    background: var(--color-primary-soft);
+
+    color: var(--color-white);
+
+    box-shadow: var(--glow-soft);
+}
+
+.button-full {
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    gap: var(--space-16);
+    flex-wrap: wrap;
+}
+
+/*==================================================*
+* 10. FOOTER
+*==================================================*/
+
+.site-footer {
+    width: 100%;
+
+    margin-top: var(--space-12);
+
+    padding: var(--space-8) 0;
+
+    border-top: 1px solid var(--border-color);
+
+    background: transparent;
+}
+
+.site-footer .container {
+    width: min(100% - 1rem, 1300px);
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: var(--space-32);
+}
+
+.footer-copyright,
+.footer-status {
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+}
+
+.footer-copyright p,
+.footer-status p {
+    margin: 0;
+}
+
+.footer-status {
+    margin-left: auto;
+}
+
+/*==================================================
+  11. RESPONSIVE
+==================================================*/
+/*--------------------------------------------------
+  МОБИЛЬНАЯ ШАПКА
+--------------------------------------------------*/
+
+.site-header {
+    padding: var(--space-32) 0;
+}
+
+.site-header .container {
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--space-16);
+
+    text-align: center;
+}
+
+/* Логотип */
+
+.header-logo {
+    flex: none;
+}
+
+.header-logo img {
+    width: 56px;
+    height: auto;
+}
+
+/* Название конкурса */
+
+.header-title {
+    width: 100%;
+    flex: none;
+}
+
+.header-title h1 {
+    margin-bottom: var(--space-8);
+
+    font-size: 1.4rem;
+    line-height: 1.15;
+}
+
+.header-subtitle {
+    font-size: 1rem;
+    line-height: 1.1;
+	margin-bottom: var(--space-12)
+}
+
+/* Приветствие */
+
+.header-welcome {
+    width: 100%;
+    flex: none;
+
+    text-align: left;
+}
+
+.header-welcome p {
+    font-size: 0.95rem;
+    line-height: 1.1;
+}
+
+@media (max-width: 768px) {
+
+ /* ---------- PARTICIPANT ---------- */
+
+.participant-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0;
+
+    padding: var(--space-24);
+
+    text-align: center;
+}
+
+/* Фото */
+
+.participant-photo {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: var(--space-24);
+}
+
+.participant-photo img {
+    width: 160px;
+    height: 160px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+/* Информация */
+
+.participant-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+}
+
+.participant-name {
+    margin-bottom: var(--space-16);
+
+    font-size: 1.4rem;
+    line-height: 1.15;
+
+    text-align: center;
+}
+
+.participant-position {
+    margin-bottom: var(--space-8);
+
+    font-size: 1rem;
+    line-height: 1.25;
+
+    text-align: center;
+}
+
+.participant-department {
+    margin-bottom: var(--space-32);
+
+    font-size: 1rem;
+    line-height: 1.1;
+
+    text-align: left;
+}
+
+/* Контакты */
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: var(--space-16);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+
+    justify-content: flex-start;
+
+    width: 100%;
+
+    gap: var(--space-12);
+
+    text-align: left;
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    flex-shrink: 0;
+}
+
+.contact-icon img {
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+/*==================================================*
+* МОБИЛЬНАЯ ВЕРСИЯ — КОНТАКТЫ
+*==================================================*/
+
+.contact-item {
+    align-items: center;
+}
+
+/* Убираем подписи «Телефон», «MAX», «E-mail» */
+
+.contact-item strong {
+    display: none;
+}
+
+/* Ссылки контактов */
+
+.contact-item > a {
+    min-width: 0;
+
+    color: var(--color-text-light);
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Эффект при наведении */
+
+.contact-item > a:hover {
+    color: var(--color-primary);
+}
+
+/* Меняем порядок:
+   Телефон → E-mail → MAX */
+
+.contact-item:nth-child(2) {
+    order: 3;
+}
+
+.contact-item:nth-child(3) {
+    order: 2;
+}
+
+/* Авторский знак */
+
+.participant-seal {
+    position: static;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: var(--space-32);
+
+    transform: none;
+}
+
+.participant-seal img {
+    width: 90x;
+    height: 90px;
+
+    object-fit: contain;
+}
+
+/* ---------- ABOUT / О КОНКУРСНОЙ РАБОТЕ ---------- */
+
+.about-header {
+    position: static;
+
+    display: flex;
+    align-items: center;
+
+    gap: var(--space-12);
+
+    width: 100%;
+    max-width: 100%;
+
+    margin-bottom: var(--space-20);
+
+    padding: 0;
+
+    text-align: left;
+}
+
+.about-icon {
+    position: static;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    margin: 0;
+    padding: 0;
+
+    transform: translateY(2px);
+}
+
+.about-icon img {
+    display: block;
+
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+.about-header .section-title {
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    text-align: left;
+
+    font-size: 1.2rem;
+    line-height: 1.15;
+
+    white-space: nowrap;
+}
+
+.about-content {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    grid-column: 1 / -1;
+
+    text-align: left;
+}
+
+.about-content p {
+    width: 100%;
+
+    margin: 0 0 var(--space-16);
+
+    text-align: left;
+
+    line-height: var(--line-height-normal);
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- MATERIALS PREVIEW / КРАТКАЯ СТРУКТУРА МАТЕРИАЛОВ ---------- */
+
+.grid-2 {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    width: 100%;
+    max-width: 100%;
+
+    gap: var(--space-16);
+
+    margin: var(--space-20) 0 0;
+    padding: 0;
+}
+
+/* Карточка */
+
+.grid-2 .info-card {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+    padding: var(--space-20);
+
+    text-align: left;
+}
+
+/* Заголовок карточки */
+
+.grid-2 .card-title-with-icon {
+    display: flex;
+    align-items: center;
+
+    gap: var(--space-12);
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0 0 var(--space-12);
+    padding: 0;
+
+    text-align: left;
+
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+/* Иконка */
+
+.grid-2 .card-icon {
+    position: static;
+
+    display: block;
+
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+
+    margin: 0;
+    padding: 0;
+
+    object-fit: contain;
+	transform: translateY(2px);
+}
+
+/* Описание */
+
+.grid-2 .info-card p {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+
+    text-align: left;
+
+    font-size: 0.8rem;
+    line-height: 1.1;
+}
+
+/* ---------- MATERIALS / МАТЕРИАЛЫ ПРОЕКТА ---------- */
+
+
+/* Заголовок блока */
+
+.documents-panel-intro .section-title {
+    margin: 0 0 var(--space-12);
+
+    font-size: 1.2rem;
+
+    text-align: left;
+}
+
+
+/* Описание */
+
+.documents-panel-intro .section-description {
+    margin: 0 0 var(--space-24);
+
+    font-size: 0.9rem;
+    line-height: var(--line-height-normal);
+
+    text-align: left;
+}
+
+
+/* Иконка PDF */
+
+.documents-panel-intro .pdf-icon {
+    width: 15px;
+    height: 15px;
+
+    object-fit: contain;
+
+    vertical-align: middle;
+}
+
+
+/* Заголовок "Основные документы" */
+
+.documents-panel-intro .documents-panel-title {
+    margin: 0 0 var(--space-16);
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+
+/* Сетка основных документов */
+
+.documents-grid-primary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: var(--space-12);
+
+    width: 100%;
+}
+
+
+/* ---------- КАРТОЧКИ ОСНОВНЫХ ДОКУМЕНТОВ ---------- */
+
+.documents-grid-primary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: var(--space-12);
+
+    width: 100%;
+}
+
+
+/* Карточка документа */
+
+.documents-grid-primary .document-card {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    column-gap: var(--space-8);
+    row-gap: var(--space-8);
+
+    width: calc(100% - var(--space-0));
+    max-width: 100%;
+
+    padding: var(--space-16);
+
+    text-align: left;
+}
+
+
+/* Иконка документа */
+
+.documents-grid-primary .document-icon {
+    position: static;
+
+    grid-column: 1;
+    grid-row: 1;
+
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Изображение основной иконки */
+
+.documents-grid-primary .document-icon img {
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+	
+	transform: translateY(8px);
+}
+
+
+/* Раскрываем содержимое карточки */
+
+.documents-grid-primary .document-content {
+    display: contents;
+}
+
+
+/* Заголовок документа */
+
+.documents-grid-primary .document-title {
+    grid-column: 2;
+    grid-row: 1;
+
+    margin: 0;
+
+    font-size: 0.9rem;
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+
+/* Описание документа */
+
+.documents-grid-primary .document-description {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    width: 100%;
+
+    margin: 0;
+
+    font-size: 0.75rem;
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+
+/* Блок скачивания */
+
+.documents-grid-primary .document-meta {
+    position: absolute;
+
+    right: var(--space-12);
+    bottom: var(--space-12);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Иконка скачивания */
+
+.documents-grid-primary .document-download-icon {
+    width: 10px;
+    height: 10px;
+
+    object-fit: contain;
+	
+	transform: translateY(10px);
+}
+
+/* Уменьшаем высоту карточек основных документов */
+
+.documents-grid-primary .document-card {
+    min-height: 0;
+    height: auto;
+
+    padding: var(--space-12);
+}
+
+/* ==========================================
+   АНАЛИТИЧЕСКИЕ ОТЧЁТЫ ИИ
+========================================== */
+
+.documents-panel-ai .documents-panel-title {
+    margin: 0 0 var(--space-16);
+
+    font-size: 1.1rem;
+    line-height: 1.2;
+    text-align: left;
+}
+
+
+/* Сетка */
+
+.documents-grid-ai {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: var(--space-8);
+
+    width: 100%;
+}
+
+
+/* ==========================================
+   ОБЩАЯ СБРОС-КОРРЕКЦИЯ ИКОНОК
+========================================== */
+
+.documents-grid-ai .document-icon {
+    position: static;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==========================================
+   AI — ПЕРВЫЕ ДВЕ КАРТОЧКИ CHATGPT
+========================================== */
+
+/* Карточки ChatGPT */
+.documents-grid-ai .document-card:nth-child(1),
+.documents-grid-ai .document-card:nth-child(2) {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    min-height: 78px;
+
+    padding: var(--space-12);
+
+    text-align: left;
+}
+
+/* Иконка ChatGPT — слева от заголовка */
+.documents-grid-ai .document-card:nth-child(1) .document-icon,
+.documents-grid-ai .document-card:nth-child(2) .document-icon {
+    flex: 0 0 20px;
+
+    width: 20px;
+    height: 20px;
+
+    margin: 0 var(--space-8) 0 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(2px);
+}
+
+/* Логотип ChatGPT */
+.documents-grid-ai .document-card:nth-child(1) .document-icon img,
+.documents-grid-ai .document-card:nth-child(2) .document-icon img {
+    width: 18px;
+    height: 18px;
+
+    object-fit: contain;
+}
+
+/* Контент ChatGPT */
+.documents-grid-ai .document-card:nth-child(1) .document-content,
+.documents-grid-ai .document-card:nth-child(2) .document-content {
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    text-align: left;
+}
+
+/* Заголовок ChatGPT */
+.documents-grid-ai .document-card:nth-child(1) .document-title,
+.documents-grid-ai .document-card:nth-child(2) .document-title {
+    margin: 0;
+
+    font-size: 0.8rem;
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+/* Описание */
+.documents-grid-ai .document-card:nth-child(1) .document-description,
+.documents-grid-ai .document-card:nth-child(2) .document-description {
+    margin: var(--space-4) 0 0;
+
+    font-size: 0.65rem;
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+/* Download — ChatGPT: строго нижний правый угол */
+
+.documents-grid-ai > .document-card:nth-child(1) .document-meta,
+.documents-grid-ai > .document-card:nth-child(2) .document-meta {
+    position: absolute !important;
+
+    top: auto !important;
+    right: var(--space-8) !important;
+    bottom: var(--space-8) !important;
+    left: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.documents-grid-ai > .document-card:nth-child(1) .document-download-icon,
+.documents-grid-ai > .document-card:nth-child(2) .document-download-icon {
+    width: 8px;
+    height: 8px;
+
+    object-fit: contain;
+    transform: none !important;
+}
+
+/* Иконка загрузки */
+.documents-grid-ai .document-card:nth-child(1) .document-download-icon,
+.documents-grid-ai .document-card:nth-child(2) .document-download-icon {
+    width: 8px;
+    height: 8px;
+
+    object-fit: contain;
+}
+
+
+/* ==========================================
+   ОСТАЛЬНЫЕ МОДЕЛИ
+========================================== */
+
+/* Карточки моделей */
+.documents-grid-ai .document-card:nth-child(n + 3) {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    min-height: 42px;
+
+    padding: var(--space-8) var(--space-12);
+
+    text-align: left;
+}
+
+/* Иконка — СЛЕВА */
+.documents-grid-ai .document-card:nth-child(n + 3) .document-icon {
+    order: 1;
+
+    flex: 0 0 20px;
+
+    width: 20px;
+    height: 20px;
+
+    margin: 0 var(--space-8) 0 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    /* немного опускаем относительно текста */
+    transform: translateY(2px);
+}
+
+/* Логотип модели */
+.documents-grid-ai .document-card:nth-child(n + 3) .document-icon img {
+    width: 18px;
+    height: 18px;
+
+    object-fit: contain;
+}
+
+/* Контент — СПРАВА ОТ ИКОНКИ */
+.documents-grid-ai .document-card:nth-child(n + 3) .document-content {
+    order: 2;
+
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    text-align: left;
+}
+
+/* Название модели */
+.documents-grid-ai .document-card:nth-child(n + 3) .document-title {
+    margin: 0;
+
+    font-size: 0.75rem;
+    line-height: 1.2;
+
+    text-align: left;
+}
+
+/* Описания моделей скрываем */
+.documents-grid-ai .document-card:nth-child(n + 3) .document-description {
+    display: none;
+}
+
+/* Download у моделей скрываем */
+.documents-grid-ai .document-card:nth-child(n + 3) .document-meta {
+    display: none;
+}
+
+/* ==========================================
+   ОБРАЩЕНИЕ К КОНКУРСНОЙ КОМИССИИ
+   ========================================== */
+
+.commission-message {
+    position: relative;
+
+    padding: var(--space-24);
+    padding-bottom: var(--space-32);
+    
+    text-align: left;
+}
+
+
+/* Иконка обращения */
+
+.commission-message .quote-mark {
+    position: absolute;
+
+    top: var(--space-24);
+    left: var(--space-24);
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+}
+
+.commission-message .quote-mark img {
+    width: 32px;
+    height: 32px;
+
+    object-fit: contain;
+}
+
+
+/* Заголовок */
+
+.commission-message .section-title {
+    margin: 0 0 var(--space-12);
+
+    padding-left: 64px;
+
+    font-size: 1.1rem;
+    line-height: 1.15;
+
+    text-align: left;
+}
+
+
+/* Основной текст */
+
+.commission-message p {
+    width: 100%;
+
+    margin: 0 0 var(--space-16);
+    padding: 0;
+
+    text-align: left;
+
+    line-height: var(--line-height-normal);
+}
+
+
+/* Последняя подпись */
+
+.commission-message .message-signature {
+    margin-top: var(--space-24);
+    margin-bottom: var(--space-24);
+}
+
+
+/* ==========================================
+   КУБОК — ВНИЗУ ПО ЦЕНТРУ
+   ========================================== */
+
+.commission-message .commission-award {
+    position: static;
+
+    width: 100%;
+    height: auto;
+
+    margin: var(--space-24) 0 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-left: none;
+
+    text-align: center;
+    transform: none;
+}
+
+.commission-message .commission-award img {
+    display: block;
+
+    width: 64px;
+    height: auto;
+
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.commission-message .commission-award-text {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .site-footer p {
+        font-size: 0.6rem;
+    }
+
+}
